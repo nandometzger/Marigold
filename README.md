@@ -111,23 +111,25 @@ python run.py \
 
 ### ⚙️ Inference settings
 
-- The inference script by default will resize the input images and resize back to the original resolution.
+- The inference script by default will resize the input images and resize them back to the original resolution.
   
-  - `--resize_to_max_res`: The maximum edge length of resized input image. Default: 768.
+  - `--resize_to_max_res`: The maximum edge length of the resized input image. Default: 768.
   - `--not_resize_input`: If given, will not resize the input image.
   - `--not_resize_output`: If given, will not resize the output image back to the original resolution. Only valid without `--not_resize_input` option.
 
-- Trade-offs between **accuracy** and **speed** (for both options, larger value results in more accurate results at the cost of slower inference speed.)
+- Trade-offs between **accuracy** and **speed** (for both options, a larger value results in more accurate results at the cost of slower inference speed.)
 
   - `--n_infer`: Number of inference passes to be ensembled. Default: 10.
   - `--denoise_steps`: Number of diffusion denoising steps of each inference pass. Default: 10.
+    
+- Other arguments
+  
+  - `--disable_xformers`: Disable efficient transformer on GPUs without Tensor Cores.
+  - `--batch_size`: Batch size of repeated inference. Default: None (automatically determined).
+  - `--seed`: Random seed, can be set to ensure reproducibility. Default: None (using current time as random seed).
+  - `--depth_cmap`: Colormap used to colorize the depth prediction. Default: Spectral.
 
-- `--disable_xformers`: Disable efficient transformer on GPUs without Tensor Cores.
-- `--batch_size`: Batch size of repeated inference. Default: None (determin automatically).
-- `--seed`: Random seed, can be set to ensure reproducibility. Default: None (using current time as random seed).
-- `--depth_cmap`: Colormap used to colorize the depth prediction. Default: Spectral.
-
-- The model cache directory can be controlled by environment variable `HF_HOME`, for example:
+- The model cache directory can be controlled by the environment variable `HF_HOME`, for example:
 
     ```bash
     export HF_HOME=$(pwd)/checkpoint
